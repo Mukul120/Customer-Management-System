@@ -54,7 +54,8 @@ export default function Header({ onMenuToggle, sidebarOpen }) {
           </svg>
         </div>
         <span style={{ fontWeight: 700, fontSize: 'var(--text-base)', color: 'var(--clr-text-heading)', letterSpacing: '-0.01em' }}>
-          ContactHub
+          {/* ContactHub */}
+          CMS
         </span>
       </Link>
 
