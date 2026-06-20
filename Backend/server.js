@@ -4,6 +4,7 @@ const app = express();
 const dotenv = require("dotenv").config();
 const cors = require("cors");
 const listRoutes = require("./routes/list.routes");
+const contactRoutes = require("./routes/contact.routes");
 
 
 const port = process.env.PORT;
@@ -16,7 +17,8 @@ app.use(cors({
 }))
 
 
-app.use("/api/list",listRoutes)
+app.use("/api/list",listRoutes);
+app.use("/api/contact",contactRoutes)
 
 
 ConnectDb().then(() => {
