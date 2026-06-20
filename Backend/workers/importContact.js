@@ -166,7 +166,9 @@ const processImport = async (job) => {
 };
 
 const startWorker = async () => {
-    await ConnectDb();
+    if (mongoose.connection.readyState === 0) {
+        await ConnectDb();
+    }
 
     const worker = new Worker(importQueueName, processImport, {
         connection: redisConnection,
@@ -201,7 +203,11 @@ const startWorker = async () => {
     console.log("Contact import worker is running");
 };
 
-startWorker().catch((error) => {
-    console.log("Could not start import worker:", error.message);
-    process.exit(1);
-});
+if (require.main === module) {
+    startWorker().catch((error) => {
+        console.log("Could not start import worker:", error.message);
+        process.exit(1);
+    });
+}
+
+module.exports = { startWorker };
